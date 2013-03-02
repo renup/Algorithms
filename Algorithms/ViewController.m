@@ -29,7 +29,7 @@
    NSString * str2 = [so replaceVowels:@"This is a string" : 'd'];
     NSLog(@"This is : %@", str2);
     
-    NSString *sortedStr = [so quickSortTheString:@"sort this string"];
+    NSString *sortedStr = [so quickSortTheString:@"quick sort"];
     NSLog(@"This is : %@", sortedStr);
 
 }

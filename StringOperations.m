@@ -10,20 +10,30 @@
 
 @interface StringOperations(){
     NSMutableString * sortedStr;
-//    NSMutableString * rightStr;
-//    NSMutableString * leftStr;
+    NSMutableDictionary * dictOfLetters;
+    NSMutableArray * dictionaryItems;
+    NSString * originalRightString;
+    NSString * originalLeftString;
+    BOOL oneTimeOnly;
+
 }
+
+@property (nonatomic, copy) NSMutableString * mainAlteredStr;
 
 @end
 
 @implementation StringOperations
 
--(id)initWithLength:(NSString *) inputStr {
-    sortedStr = [[NSMutableString alloc] initWithCapacity: inputStr.length];
- //   sortedStr = [[NSMutableString alloc] initWithCapacity: 50];
+@synthesize mainAlteredStr;
 
-//    leftStr = [[NSMutableString alloc] init];
-//    rightStr = [[NSMutableString alloc] init];
+-(id)initWithLength:(NSString *) inputStr {
+
+    sortedStr = [[NSMutableString alloc] init];
+    dictOfLetters = [[NSMutableDictionary alloc] init];
+    dictionaryItems = [[NSMutableArray alloc] init];
+    originalRightString = [[NSString alloc] init];
+    originalLeftString = [[NSString alloc] init];
+    oneTimeOnly = TRUE;
     return self;
 }
 
@@ -57,7 +67,7 @@
         NSMutableString * newStr = [[NSMutableString alloc] init] ;
         for(int i =inputString.length-1; i>=0; --i) {
             char letter = [inputString characterAtIndex:i];
-            [newStr appendFormat:[NSString stringWithFormat:@"%c", letter]];
+            [newStr appendFormat:@"%@", [NSString stringWithFormat:@"%c", letter]];
         }
         return newStr;
     }else if (inputString.length ==2){
@@ -120,7 +130,7 @@
                     [mutableStr insertString:[NSString stringWithFormat:@"%c",letter] atIndex:j];
                     break;
                 default:
-                    [mutableStr appendFormat:[NSString stringWithFormat:@"%c", [inputString characterAtIndex:j]]];
+                    [mutableStr appendFormat:@"%@", [NSString stringWithFormat:@"%c", [inputString characterAtIndex:j]]];
                     break;
             }
         }    return mutableStr;
@@ -158,62 +168,89 @@
     return strWithNoRepeatition;
 }
 
+-(NSString *)temperoryStringHolder:(NSString *)rightString{
+    return rightString;
+}
+
+-(NSString *)temperoryLeftStringHolder:(NSString *)leftString{
+    return leftString;
+}
+
 
 -(NSString *)quickSortTheString: (NSString *)orignalStr {
-    NSMutableArray * holder = [[NSMutableArray alloc] init];
     NSMutableString * rightStr = [[NSMutableString alloc] init];
     NSMutableString * leftStr = [[NSMutableString alloc] init];
-    int j = (arc4random() % orignalStr.length);
-    char piv = [orignalStr characterAtIndex: j ];
+    int totalLengthOfString = orignalStr.length;
+    int middleNumber;
+    
+    if (totalLengthOfString % 2) {
+        middleNumber = (totalLengthOfString +1)/2 ; //odd
+    }else{
+        middleNumber = (totalLengthOfString +2)/2 ; //even
+    }
+    char pivot = [orignalStr characterAtIndex:(middleNumber-1)];
 
-    while (piv == ' ') {
-        piv = [orignalStr characterAtIndex: (arc4random() % orignalStr.length) ];
+    if (pivot == ' ') {
+        pivot = [orignalStr characterAtIndex:middleNumber];
+    }
+    for (int i =0; i< totalLengthOfString; i++) {
+        NSLog(@"char = %c", [orignalStr characterAtIndex:i]);
+        if ([orignalStr characterAtIndex:i]  > pivot  ) {
+                [rightStr appendFormat:@"%@",[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:i]]];
+
+        }else if([orignalStr characterAtIndex:i] == ' ' || [orignalStr characterAtIndex:i] == pivot ){
+           //do nothing
+        }else{
+                    [leftStr appendFormat:@"%@",[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:i]]];
+        }
     }
    
-    NSLog(@" pivot = : %c", piv);
-    for (int i =0; i< orignalStr.length; i++) {
-        if ([orignalStr characterAtIndex:i]  > piv  ) {
-            [rightStr appendFormat:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:i]]];
-        }else if([orignalStr characterAtIndex:i] == ' '){
-            [holder addObject:[NSNumber numberWithInt:i]];
-            //[sortedStr insertString:[NSString stringWithFormat:@"%c", ' '] atIndex:i];
-        }
-        else if(piv == [orignalStr characterAtIndex:i]){
-            
-        }else{
-            [leftStr appendFormat:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:i]]];
-        }
-    }
-    NSLog(@"left = %@  right = %@", leftStr, rightStr);
-    
-    [sortedStr appendString:leftStr];
-//    [sortedStr appendString:[NSString stringWithFormat:@"%c", piv]];
-//    [sortedStr appendString:rightStr];
-//    int leftLen = leftStr.length;
-    [sortedStr insertString:[NSString stringWithFormat:@"%c", piv] atIndex:(leftStr.length +1)];
-    while (leftStr.length >1) {
+    int pos = leftStr.length;
+    [dictOfLetters setValue:[NSNumber numberWithInt:pos] forKey:[NSString stringWithFormat:@"%c", pivot]];
+
+   
+    if (leftStr.length ==1 || rightStr.length ==1) {
         if (leftStr.length ==1) {
-            break;
+            [dictOfLetters setValue:[NSNumber numberWithInt:(pos -1)] forKey:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:(pos -1)]]];
+            [leftStr stringByReplacingCharactersInRange:NSMakeRange((pos -1), 1) withString:@""];
         }else{
-            [self quickSortTheString:leftStr]; 
-        }
-    }
-    while (rightStr.length >1) {
-        if (rightStr.length ==1) {
-            break;
-        }else{
-            [self quickSortTheString:rightStr]; 
+            [dictOfLetters setValue:[NSNumber numberWithInt:(pos +1)] forKey:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:(pos +1)]]];
+            [rightStr stringByReplacingCharactersInRange:NSMakeRange(pos, 1) withString:@""];
         }
     }
     
-    for (int g =0; g< [holder count]; g++) {
-        [sortedStr insertString:[NSString stringWithFormat:@"%c", ' '] atIndex: [[holder objectAtIndex:g] intValue]];
+    if (leftStr.length <1) {
+        [dictOfLetters setValue:[NSNumber numberWithInt:(pos -1)] forKey:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:pos]]];
     }
     
-    NSLog(@"Sorted str = %@", sortedStr);
-//    [leftStr appendString:rightStr];
-    return sortedStr;
+    if (leftStr.length>= 1 || rightStr.length >= 1) {
+        if (oneTimeOnly) {
+            originalRightString = [self temperoryStringHolder:rightStr];
+            oneTimeOnly = FALSE;
+        }
+    }
+    
+    if (leftStr.length >1) {
+        [self quickSortTheString:leftStr];
+    }
+    
+    if(originalRightString.length>1){
+        oneTimeOnly = TRUE;
+        [self quickSortTheString:originalRightString];
+    }
+    
+    NSMutableArray * tempArr = [[NSMutableArray alloc] init];
+    for(NSNumber * test in [dictOfLetters allValues]){
+        [tempArr addObject:test];
+    }
+    [tempArr sortUsingSelector: @selector(compare:)];
+    
+    for(NSNumber * sortedNumber in tempArr){
+        NSArray * letter = [dictOfLetters allKeysForObject:sortedNumber];
+        [sortedStr appendFormat:@"%@", [NSString stringWithFormat:@"%@",[letter objectAtIndex:0]]];
+    }
+    
+return  sortedStr;
 }
-    
 
 @end

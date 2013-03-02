@@ -12,6 +12,7 @@
 
 @interface StringOperations : NSObject
 
+
 -(NSString *)reverseString:(NSString*) inputString;
 -(NSString *)replaceVowels:(NSString*) inputString :(char)letter;
 -(char *)reverseString2:(char[]) inputString;
