@@ -9,12 +9,7 @@
 #import "StringOperations.h"
 
 @interface StringOperations(){
-    NSMutableString * sortedStr;
-    NSMutableDictionary * dictOfLetters;
-    NSMutableArray * dictionaryItems;
-    NSString * originalRightString;
-    NSString * originalLeftString;
-    BOOL oneTimeOnly;
+
 
 }
 
@@ -26,15 +21,63 @@
 
 @synthesize mainAlteredStr;
 
--(id)initWithLength:(NSString *) inputStr {
+-(int) factorialOfNumber:(int)inputNumber {
+        if (inputNumber ==1) {
+            return 1;
+        }
+       int MultipliedResult = inputNumber * [self factorialOfNumber:(inputNumber-1)];  /// 3* fact(2)
+    return MultipliedResult;
+}
 
-    sortedStr = [[NSMutableString alloc] init];
-    dictOfLetters = [[NSMutableDictionary alloc] init];
-    dictionaryItems = [[NSMutableArray alloc] init];
-    originalRightString = [[NSString alloc] init];
-    originalLeftString = [[NSString alloc] init];
-    oneTimeOnly = TRUE;
-    return self;
+-(NSString *)quickSortTrial:(NSString *)givenString{
+    if (givenString.length <=1) {
+        return givenString;
+    }
+    NSMutableString * sortedStr = [[NSMutableString alloc] init];
+
+
+    NSMutableString * rightStr = [[NSMutableString alloc] init];
+    NSMutableString * leftStr = [[NSMutableString alloc] init];
+    NSString *leftResult= [[NSString alloc] init];
+    NSString *rightResult= [[NSString alloc] init];
+    
+    int totalLengthOfString = givenString.length;
+    int middleNumber;
+    
+    if (totalLengthOfString % 2) {
+        middleNumber = (totalLengthOfString +1)/2 ; //odd
+    }else{
+        middleNumber = (totalLengthOfString +2)/2 ; //even
+    }
+    char pivot = [givenString characterAtIndex:(middleNumber-1)];
+    
+    if (pivot == ' ') {
+        pivot = [givenString characterAtIndex:middleNumber];
+    }
+
+    for (int i =0; i< totalLengthOfString; i++) {
+//        NSLog(@"char = %c", [givenString characterAtIndex:i]);
+        if ([givenString characterAtIndex:i]  > pivot  ) {
+            [rightStr appendFormat:@"%@",[NSString stringWithFormat:@"%c", [givenString characterAtIndex:i]]];
+            
+        }else if([givenString characterAtIndex:i] == ' ' || [givenString characterAtIndex:i] == pivot ){
+            //do nothing
+        }else{
+            [leftStr appendFormat:@"%@",[NSString stringWithFormat:@"%c", [givenString characterAtIndex:i]]];
+        }
+    }
+    
+    if (leftStr.length >=1) {
+        leftResult = [self quickSortTrial:leftStr];
+    }
+
+    if (rightStr.length >=1) {
+        rightResult = [self quickSortTrial:rightStr];
+    }
+    
+        [sortedStr appendString:[NSString stringWithFormat:@"%@%c%@", leftResult,pivot,rightResult]];
+
+    return sortedStr;
 }
 
 //-(NSString *)reverseString:(char*) myStr {
@@ -166,91 +209,6 @@
     }
     NSLog(@"no repeatition = %@", strWithNoRepeatition);
     return strWithNoRepeatition;
-}
-
--(NSString *)temperoryStringHolder:(NSString *)rightString{
-    return rightString;
-}
-
--(NSString *)temperoryLeftStringHolder:(NSString *)leftString{
-    return leftString;
-}
-
-
--(NSString *)quickSortTheString: (NSString *)orignalStr {
-    NSMutableString * rightStr = [[NSMutableString alloc] init];
-    NSMutableString * leftStr = [[NSMutableString alloc] init];
-    int totalLengthOfString = orignalStr.length;
-    int middleNumber;
-    
-    if (totalLengthOfString % 2) {
-        middleNumber = (totalLengthOfString +1)/2 ; //odd
-    }else{
-        middleNumber = (totalLengthOfString +2)/2 ; //even
-    }
-    char pivot = [orignalStr characterAtIndex:(middleNumber-1)];
-
-    if (pivot == ' ') {
-        pivot = [orignalStr characterAtIndex:middleNumber];
-    }
-    for (int i =0; i< totalLengthOfString; i++) {
-        NSLog(@"char = %c", [orignalStr characterAtIndex:i]);
-        if ([orignalStr characterAtIndex:i]  > pivot  ) {
-                [rightStr appendFormat:@"%@",[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:i]]];
-
-        }else if([orignalStr characterAtIndex:i] == ' ' || [orignalStr characterAtIndex:i] == pivot ){
-           //do nothing
-        }else{
-                    [leftStr appendFormat:@"%@",[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:i]]];
-        }
-    }
-   
-    int pos = leftStr.length;
-    [dictOfLetters setValue:[NSNumber numberWithInt:pos] forKey:[NSString stringWithFormat:@"%c", pivot]];
-
-   
-    if (leftStr.length ==1 || rightStr.length ==1) {
-        if (leftStr.length ==1) {
-            [dictOfLetters setValue:[NSNumber numberWithInt:(pos -1)] forKey:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:(pos -1)]]];
-            [leftStr stringByReplacingCharactersInRange:NSMakeRange((pos -1), 1) withString:@""];
-        }else{
-            [dictOfLetters setValue:[NSNumber numberWithInt:(pos +1)] forKey:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:(pos +1)]]];
-            [rightStr stringByReplacingCharactersInRange:NSMakeRange(pos, 1) withString:@""];
-        }
-    }
-    
-    if (leftStr.length <1) {
-        [dictOfLetters setValue:[NSNumber numberWithInt:(pos -1)] forKey:[NSString stringWithFormat:@"%c", [orignalStr characterAtIndex:pos]]];
-    }
-    
-    if (leftStr.length>= 1 || rightStr.length >= 1) {
-        if (oneTimeOnly) {
-            originalRightString = [self temperoryStringHolder:rightStr];
-            oneTimeOnly = FALSE;
-        }
-    }
-    
-    if (leftStr.length >1) {
-        [self quickSortTheString:leftStr];
-    }
-    
-    if(originalRightString.length>1){
-        oneTimeOnly = TRUE;
-        [self quickSortTheString:originalRightString];
-    }
-    
-    NSMutableArray * tempArr = [[NSMutableArray alloc] init];
-    for(NSNumber * test in [dictOfLetters allValues]){
-        [tempArr addObject:test];
-    }
-    [tempArr sortUsingSelector: @selector(compare:)];
-    
-    for(NSNumber * sortedNumber in tempArr){
-        NSArray * letter = [dictOfLetters allKeysForObject:sortedNumber];
-        [sortedStr appendFormat:@"%@", [NSString stringWithFormat:@"%@",[letter objectAtIndex:0]]];
-    }
-    
-return  sortedStr;
 }
 
 @end

@@ -22,15 +22,21 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    so = [[StringOperations alloc] initWithLength:@"sort this string"];
+    so = [[StringOperations alloc] init];
     NSString * str = [so reverseString:@"AB"];
     NSLog(@"This is : %@", str);
     
    NSString * str2 = [so replaceVowels:@"This is a string" : 'd'];
     NSLog(@"This is : %@", str2);
     
-    NSString *sortedStr = [so quickSortTheString:@"quick sort"];
-    NSLog(@"This is : %@", sortedStr);
+    int finalResult = [so factorialOfNumber:5];
+    NSLog(@"Factorial result = %i", finalResult);
+    
+//    NSString *sortedStr = [so quickSortTheString:@"quick sort"];
+//    NSLog(@"This is : %@", sortedStr);
+    
+    NSString * try = [so quickSortTrial:@"quick"];
+    NSLog(@"quick sort = %@", try);
 
 }
 

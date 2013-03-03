@@ -16,6 +16,8 @@
 -(NSString *)reverseString:(NSString*) inputString;
 -(NSString *)replaceVowels:(NSString*) inputString :(char)letter;
 -(char *)reverseString2:(char[]) inputString;
--(NSString *)quickSortTheString: (NSString *)orignalStr;
--(id)initWithLength:(NSString *) inputStr;
+-(int) factorialOfNumber:(int)inputNumber;
+
+-(NSString *)quickSortTrial:(NSString *)givenString;
+
 @end
