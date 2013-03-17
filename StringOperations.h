@@ -20,4 +20,6 @@
 
 -(NSString *)quickSortTrial:(NSString *)givenString;
 
+-(NSString *)threadingDiceLetters:(NSString *)givenStr;
+
 @end

@@ -9,7 +9,7 @@
 #import "StringOperations.h"
 
 @interface StringOperations(){
-
+    
 
 }
 
@@ -27,6 +27,11 @@
         }
        int MultipliedResult = inputNumber * [self factorialOfNumber:(inputNumber-1)];  /// 3* fact(2)
     return MultipliedResult;
+}
+
+-(NSString *)threadingDiceLetters:(NSString *)givenStr {
+    
+    
 }
 
 -(NSString *)quickSortTrial:(NSString *)givenString{
