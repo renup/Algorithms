@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AFC0E4F316F68E6C000EE190 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E4F216F68E6C000EE190 /* Server.m */; };
+		AFC0E4F716F68EB2000EE190 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E4F616F68EB2000EE190 /* ClientManager.m */; };
+		AFC0E50616F6A255000EE190 /* WriterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E50516F6A255000EE190 /* WriterClient.m */; };
+		AFC0E50916F6A339000EE190 /* ReaderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E50816F6A338000EE190 /* ReaderClient.m */; };
 		D7BE289B16D942C700A88E3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BE289A16D942C700A88E3E /* UIKit.framework */; };
 		D7BE289D16D942C700A88E3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BE289C16D942C700A88E3E /* Foundation.framework */; };
 		D7BE289F16D942C700A88E3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BE289E16D942C700A88E3E /* CoreGraphics.framework */; };
@@ -22,6 +26,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AFC0E4F116F68E6C000EE190 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		AFC0E4F216F68E6C000EE190 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		AFC0E4F516F68EB2000EE190 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientManager.h; sourceTree = "<group>"; };
+		AFC0E4F616F68EB2000EE190 /* ClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientManager.m; sourceTree = "<group>"; };
+		AFC0E50416F6A255000EE190 /* WriterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriterClient.h; sourceTree = "<group>"; };
+		AFC0E50516F6A255000EE190 /* WriterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterClient.m; sourceTree = "<group>"; };
+		AFC0E50716F6A338000EE190 /* ReaderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderClient.h; sourceTree = "<group>"; };
+		AFC0E50816F6A338000EE190 /* ReaderClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderClient.m; sourceTree = "<group>"; };
+		AFC0E50A16F6A894000EE190 /* CoreClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreClient.h; sourceTree = "<group>"; };
 		D7BE289716D942C700A88E3E /* Algorithms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Algorithms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7BE289A16D942C700A88E3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D7BE289C16D942C700A88E3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,6 +72,15 @@
 		D7BE288E16D942C700A88E3E = {
 			isa = PBXGroup;
 			children = (
+				AFC0E50416F6A255000EE190 /* WriterClient.h */,
+				AFC0E50516F6A255000EE190 /* WriterClient.m */,
+				AFC0E4F116F68E6C000EE190 /* Server.h */,
+				AFC0E4F216F68E6C000EE190 /* Server.m */,
+				AFC0E4F516F68EB2000EE190 /* ClientManager.h */,
+				AFC0E4F616F68EB2000EE190 /* ClientManager.m */,
+				AFC0E50716F6A338000EE190 /* ReaderClient.h */,
+				AFC0E50816F6A338000EE190 /* ReaderClient.m */,
+				AFC0E50A16F6A894000EE190 /* CoreClient.h */,
 				D7BE28A016D942C700A88E3E /* Algorithms */,
 				D7BE289916D942C700A88E3E /* Frameworks */,
 				D7BE289816D942C700A88E3E /* Products */,
@@ -182,6 +204,10 @@
 				D7BE28AB16D942C700A88E3E /* AppDelegate.m in Sources */,
 				D7BE28B716D942C700A88E3E /* ViewController.m in Sources */,
 				D7BE28C216D9435400A88E3E /* StringOperations.m in Sources */,
+				AFC0E4F316F68E6C000EE190 /* Server.m in Sources */,
+				AFC0E4F716F68EB2000EE190 /* ClientManager.m in Sources */,
+				AFC0E50616F6A255000EE190 /* WriterClient.m in Sources */,
+				AFC0E50916F6A339000EE190 /* ReaderClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

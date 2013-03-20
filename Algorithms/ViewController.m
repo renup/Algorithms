@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "StringOperations.h"
+#import "ClientManager.h"
 
 @interface ViewController (){
     StringOperations *so;
@@ -51,23 +52,17 @@
     NSString * try = [so quickSortTrial:@"quick"];
     NSLog(@"quick sort = %@", try);
     
-//    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [button1 addTarget:self
-//               action:@selector(aMethod:)
-//     forControlEvents:UIControlEventTouchDown];
-//    [button1 setTitle:@" " forState:UIControlStateNormal];
-//    button1.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
-//    [self.view addSubview:button1];
-    
     dice1 = [[UILabel alloc] initWithFrame:CGRectMake(50, 100, 200, 50)];
     dice1.backgroundColor = [UIColor brownColor];
-//    BallNummer.text = [NSString stringWithFormat:@"%i", nummer];
-//    BallNummer.tag = *nummer;
     [self.view addSubview:dice1];
     
     dice2 = [[UILabel alloc] initWithFrame:CGRectMake(50, 200, 200, 50)];
     dice2.backgroundColor = [UIColor greenColor];
     [self.view addSubview:dice2];
+    
+    ClientManager * clientManager = [[ClientManager alloc] init];
+    [clientManager createClientThreads];
+    
     
     // run a thread and call the method: threadingDiceLetters:btn1
 //    NSThread * thread1 = [[NSThread alloc] initWithTarget:self selector:@selector(threadingDiceLetters:) object:dice1]; 
@@ -113,36 +108,6 @@
     NSLog(@" final dice1 = %@,   final dice2 =  %@", dice1.text, dice2.text);
     
 }
-
-//-(void)practiceMutex: (UILabel*)diceReceived {
-////    int randomForLoopInt = (arc4random() % letterForDices.length) +1;
-//    int randomForLoopInt = (arc4random() % 48) +1;
-//
-//    for (int i =0; i< randomForLoopInt; i++) {
-//        @synchronized(diceReceived){
-//            int randomInt = (arc4random() % (letterForDices.length -1));
-//            diceReceived.text = [NSString stringWithFormat:@"%c", [letterForDices characterAtIndex:randomInt]];
-////[letterForDices replaceCharactersInRange:NSMakeRange(randomInt, 1) withString:@""];
-//            NSString * prevStr = diceReceived.text;
-//            [letterForDices deleteCharactersInRange:NSMakeRange(randomInt, 1)];
-//            NSLog(@"length of letterOfDices = %i", letterForDices.length);
-//            int randomInt2;
-//            if (letterForDices.length >1) {
-//                randomInt2 = (arc4random() % (letterForDices.length -1));
-//            }else{
-//                randomInt2 = (arc4random() % (letterForDices.length));
-//            }
-//            diceReceived.text = [NSString stringWithFormat:@"%c", [letterForDices characterAtIndex:randomInt2]];
-//            [letterForDices deleteCharactersInRange:NSMakeRange(randomInt2, 1)];
-//            [letterForDices appendFormat:@"%@", prevStr];
-//            NSLog(@"letter = %@", diceReceived.text);
-//            NSLog(@"string = %@", letterForDices);
-//
-////            wait((NSInteger*) 2);
-//        };
-//        
-//    }
-//}
 
 
 //A very nice article on @synchronized : http://refactr.com/blog/2012/10/ios-tips-synchronized/
