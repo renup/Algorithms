@@ -23,11 +23,14 @@
     Server * serverObj = [Server getSharedServerObj];
     [serverObj initArray];
     
+    //To make multiple writers work with multiple writers
+    for (int i = 0; i< 10; i++) {
     WriterClient * writerObj = [[WriterClient alloc] init];
     int randomInt = (arc4random() % 100) +1;
     NSThread * writerThread = [[NSThread alloc] initWithTarget:writerObj selector:@selector(sendRequest:) object:[NSString stringWithFormat:@"PUT %i", randomInt]];
     [writerThread setName:@"writerThread"];
     [writerThread start];
+    }
     
     for (int i = 0; i< 10; i++) {
         ReaderClient * readerObj = [[ReaderClient alloc] init];

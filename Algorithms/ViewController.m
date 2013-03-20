@@ -36,8 +36,8 @@
     letterForDices = [[NSMutableString alloc] init];
     [letterForDices appendString:@"ABCDEFG"];
 
-    SemaphoreManager *sm = [[SemaphoreManager alloc] init];
-    [sm createMultipleReaders];
+//    SemaphoreManager *sm = [[SemaphoreManager alloc] init];
+//    [sm createMultipleReaders];
  
     so = [[StringOperations alloc] init];
     NSString * str = [so reverseString:@"AB"];

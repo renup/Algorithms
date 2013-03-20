@@ -7,9 +7,12 @@
 //
 
 #import "Server.h"
+#include "pthread.h"
 
 @interface Server() {
-    NSString * syncObj;
+//    NSString * syncObj;
+//    NSLock *myThreadLock;
+    pthread_mutex_t mutex;
 }
 @property (nonatomic, strong) NSMutableArray * imagesArray;
 
@@ -24,9 +27,9 @@ static Server *sharedServerClassObj = NULL;
 + (Server *) getSharedServerObj
 {
     if (sharedServerClassObj == nil) {
-        sharedServerClassObj = [[Server alloc] init];
-        
+        sharedServerClassObj = [[Server alloc] init]; 
     }
+
     return sharedServerClassObj;
 }
 
@@ -36,23 +39,35 @@ static Server *sharedServerClassObj = NULL;
         NSString * imageName =[NSString stringWithFormat:@"image%i", i];
         [imageNamesArr addObject:imageName];
     }
-    
-    self.imagesArray = [[NSMutableArray alloc] initWithArray:imageNamesArr];    
+        pthread_mutex_init(&mutex, NULL);
+
+//    myThreadLock = [[NSLock alloc] init];
+    self.imagesArray = [[NSMutableArray alloc] initWithArray:imageNamesArr];
 }
 
+// Here three ways of locking threads are shown- Synchronization, using pthreads and NSLock. All of them serve the same purpose of synchronizing the incoming threads in the method.
 -(NSString*) receivedRequest:(NSString *)imageRequest{
 //    @synchronized (syncObj){
-        NSString * requestType = [imageRequest substringWithRange: NSMakeRange (0, 3)];
+    
+    NSString * requestType = [imageRequest substringWithRange: NSMakeRange (0, 3)];
     
         if ([requestType isEqualToString:@"GET"]) {
             NSString * num = [imageRequest substringWithRange:NSMakeRange(4, 1)];
             NSString * imageName = [imagesArray objectAtIndex:[num intValue]];
             return imageName;
         }else{
+//            @synchronized (syncObj){
+//            [myThreadLock lock];
+            pthread_mutex_lock(&mutex);
+
             [imagesArray addObject:imageRequest];
+            usleep(2);
+            pthread_mutex_unlock(&mutex);
+//            [myThreadLock unlock];
             return @"Added image";
-        }
-   // }
+
+            }
+
 }
 
 

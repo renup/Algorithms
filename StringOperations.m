@@ -30,7 +30,7 @@
 }
 
 -(NSString *)threadingDiceLetters:(NSString *)givenStr {
-    
+    return nil;
     
 }
 
@@ -190,7 +190,7 @@
 // Find out if a string is within another string and return the position where you find the other string
 - (int) findStr:(NSString*) origStr : (NSString*) strToFind{
     
-
+    return 1;
     
 }
 
