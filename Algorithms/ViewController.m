@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "StringOperations.h"
 #import "ClientManager.h"
+#import "SemaphoreManager.h"
 
 @interface ViewController (){
     StringOperations *so;
@@ -35,6 +36,8 @@
     letterForDices = [[NSMutableString alloc] init];
     [letterForDices appendString:@"ABCDEFG"];
 
+    SemaphoreManager *sm = [[SemaphoreManager alloc] init];
+    [sm createMultipleReaders];
  
     so = [[StringOperations alloc] init];
     NSString * str = [so reverseString:@"AB"];
@@ -74,15 +77,15 @@
     dice1.text = @"";
     dice2.text = @"";
     
-    
-    NSThread * thread1 = [[NSThread alloc] initWithTarget:self selector:@selector(practiceSynchronization:) object:dice1];
-    [thread1 setName:@"FirstThread"];
-    [thread1 start];
-    
-    // run a thread and call the method: threadingDiceLetters:btn2
-    NSThread * thread2 = [[NSThread alloc] initWithTarget:self selector:@selector(practiceSynchronization:) object:dice2];
-    [thread2 setName:@"SecondThread"];
-    [thread2 start];
+//    
+//    NSThread * thread1 = [[NSThread alloc] initWithTarget:self selector:@selector(practiceSynchronization:) object:dice1];
+//    [thread1 setName:@"FirstThread"];
+//    [thread1 start];
+//    
+//    // run a thread and call the method: threadingDiceLetters:btn2
+//    NSThread * thread2 = [[NSThread alloc] initWithTarget:self selector:@selector(practiceSynchronization:) object:dice2];
+//    [thread2 setName:@"SecondThread"];
+//    [thread2 start];
 
 }
 

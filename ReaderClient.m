@@ -11,9 +11,11 @@
 
 @implementation ReaderClient
 
--(NSString*)sendRequest: (NSString*)imageNum {
+-(NSString*)sendRequest:(NSString*)imageNum {
     Server * serverObj = [Server getSharedServerObj];
     NSString *imageReceived = [serverObj receivedRequest:imageNum];
+//    NSString *imageReceived = [serverObj.imagesArray objectAtIndex:[imageNum intValue]];
+   
     NSLog(@"imageReceived = %@", imageReceived);
     return imageReceived;
 }

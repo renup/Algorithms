@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+//static NSMutableArray * imagesArray;
 
 @interface Server : NSObject{
 }
 
+
 + (Server *) getSharedServerObj;
 
 -(NSString*) receivedRequest:(NSString *)imageRequest;
+-(void)initArray;
 @end

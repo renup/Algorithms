@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF057A4416F9594100DBDCF9 /* SemaphoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF057A4316F9594100DBDCF9 /* SemaphoreManager.m */; };
 		AFC0E4F316F68E6C000EE190 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E4F216F68E6C000EE190 /* Server.m */; };
 		AFC0E4F716F68EB2000EE190 /* ClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E4F616F68EB2000EE190 /* ClientManager.m */; };
 		AFC0E50616F6A255000EE190 /* WriterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC0E50516F6A255000EE190 /* WriterClient.m */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF057A4216F9594100DBDCF9 /* SemaphoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemaphoreManager.h; sourceTree = "<group>"; };
+		AF057A4316F9594100DBDCF9 /* SemaphoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SemaphoreManager.m; sourceTree = "<group>"; };
 		AFC0E4F116F68E6C000EE190 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		AFC0E4F216F68E6C000EE190 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		AFC0E4F516F68EB2000EE190 /* ClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientManager.h; sourceTree = "<group>"; };
@@ -69,7 +72,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D7BE288E16D942C700A88E3E = {
+		AF057A4616F9595A00DBDCF9 /* SingleWriteMultipleReads */ = {
 			isa = PBXGroup;
 			children = (
 				AFC0E50416F6A255000EE190 /* WriterClient.h */,
@@ -81,6 +84,24 @@
 				AFC0E50716F6A338000EE190 /* ReaderClient.h */,
 				AFC0E50816F6A338000EE190 /* ReaderClient.m */,
 				AFC0E50A16F6A894000EE190 /* CoreClient.h */,
+			);
+			name = SingleWriteMultipleReads;
+			sourceTree = "<group>";
+		};
+		AF057A4716F9598700DBDCF9 /* Semphore */ = {
+			isa = PBXGroup;
+			children = (
+				AF057A4216F9594100DBDCF9 /* SemaphoreManager.h */,
+				AF057A4316F9594100DBDCF9 /* SemaphoreManager.m */,
+			);
+			name = Semphore;
+			sourceTree = "<group>";
+		};
+		D7BE288E16D942C700A88E3E = {
+			isa = PBXGroup;
+			children = (
+				AF057A4716F9598700DBDCF9 /* Semphore */,
+				AF057A4616F9595A00DBDCF9 /* SingleWriteMultipleReads */,
 				D7BE28A016D942C700A88E3E /* Algorithms */,
 				D7BE289916D942C700A88E3E /* Frameworks */,
 				D7BE289816D942C700A88E3E /* Products */,
@@ -208,6 +229,7 @@
 				AFC0E4F716F68EB2000EE190 /* ClientManager.m in Sources */,
 				AFC0E50616F6A255000EE190 /* WriterClient.m in Sources */,
 				AFC0E50916F6A339000EE190 /* ReaderClient.m in Sources */,
+				AF057A4416F9594100DBDCF9 /* SemaphoreManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

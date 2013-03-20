@@ -11,33 +11,37 @@
 @interface Server() {
     NSString * syncObj;
 }
+@property (nonatomic, strong) NSMutableArray * imagesArray;
 
 @end
 
 static Server *sharedServerClassObj = NULL;
-static NSMutableArray * imagesArray;
-
+//static NSMutableArray * imagesArray;
 
 @implementation Server
+@synthesize imagesArray;
 
 + (Server *) getSharedServerObj
 {
     if (sharedServerClassObj == nil) {
         sharedServerClassObj = [[Server alloc] init];
         
-        NSMutableArray * imageNamesArr = [[NSMutableArray alloc] init];
-        for (int i =0; i< 10; i++) {
-            NSString * imageName =[NSString stringWithFormat:@"image%i", i];
-            [imageNamesArr addObject:imageName];
-        }
-        imagesArray = [[NSMutableArray alloc] initWithArray:imageNamesArr];
-        
     }
     return sharedServerClassObj;
 }
 
+-(void) initArray{
+    NSMutableArray * imageNamesArr = [[NSMutableArray alloc] init];
+    for (int i =0; i< 10; i++) {
+        NSString * imageName =[NSString stringWithFormat:@"image%i", i];
+        [imageNamesArr addObject:imageName];
+    }
+    
+    self.imagesArray = [[NSMutableArray alloc] initWithArray:imageNamesArr];    
+}
+
 -(NSString*) receivedRequest:(NSString *)imageRequest{
-    @synchronized (syncObj){
+//    @synchronized (syncObj){
         NSString * requestType = [imageRequest substringWithRange: NSMakeRange (0, 3)];
     
         if ([requestType isEqualToString:@"GET"]) {
@@ -48,7 +52,7 @@ static NSMutableArray * imagesArray;
             [imagesArray addObject:imageRequest];
             return @"Added image";
         }
-    }
+   // }
 }
 
 

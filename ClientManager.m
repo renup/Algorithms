@@ -9,6 +9,7 @@
 #import "ClientManager.h"
 #import "WriterClient.h"
 #import "ReaderClient.h"
+#import "Server.h"
 
 @interface ClientManager(){
 }
@@ -18,6 +19,10 @@
 @implementation ClientManager
 
 -(void)createClientThreads {
+    
+    Server * serverObj = [Server getSharedServerObj];
+    [serverObj initArray];
+    
     WriterClient * writerObj = [[WriterClient alloc] init];
     int randomInt = (arc4random() % 100) +1;
     NSThread * writerThread = [[NSThread alloc] initWithTarget:writerObj selector:@selector(sendRequest:) object:[NSString stringWithFormat:@"PUT %i", randomInt]];
